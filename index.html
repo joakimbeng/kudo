@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Kudo</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Permanent+Marker"
+      rel="stylesheet"
+      type="text/css"
+      >
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family: 'Gloria Hallelujah', cursive;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      footer {
+        position: absolute;
+        bottom: 0;
+        font-size: 80%;
+        padding: .5em;
+        width: 100%;
+        background: rgba(0, 0, 0, .5);
+        color: #ccc;
+      }
+      .footer-links {
+        list-style: none;
+        text-indent: 0;
+        float: left;
+        width: 100%;
+      }
+      .footer-link {
+        float: left;
+      }
+      .footer-link.right {
+        float: right;
+      }
+      select, textarea {
+        font-family: inherit;
+        font-size: 1em;
+      }
+      .info-box {
+        z-index: 10;
+        background: rgba(0, 0, 0, .75);
+        color: #fdfdfd;
+        position: absolute;
+        max-width: 600px;
+        margin: 1rem auto;
+        padding: .5rem;
+        border-radius: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+      }
+      a, a:link, a:visited {
+        color: #fdfdfd;
+      }
+      .generator {
+        display: none;
+      }
+      .form .generator {
+        display: block;
+      }
+      .form .non-generator {
+        display: none;
+      }
+      .thanks {
+        background-image: url(86H.jpg);
+      }
+      .manythanks {
+        background-image: url(52H.jpg);
+      }
+      .welldone {
+        background-image: url(74H.jpg);
+      }
+      .awesome {
+        background-image: url(101H.jpg);
+      }
+      .happy {
+        background-image: url(119H.jpg);
+      }
+      .congrats {
+        background-image: url(158H.jpg);
+      }
+      .greatjob {
+        background-image: url(13H.jpg);
+      }
+      .theme-picker-container {
+        top: 1em;
+      }
+      .url-container {
+        bottom: 2em;
+      }
+      .card {
+        display: inline-block;
+        position: absolute;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .2);
+        border: 1px solid rgba(0, 0, 0, .1);
+        max-width: 500px;
+        width: 100%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -55%);
+        -webkit-transform: translate(-50%, -55%);
+        -moz-transform: translate(-50%, -55%);
+        -ms-transform: translate(-50%, -55%);
+        color: #333;
+      }
+      .card-header {
+        padding: 1rem;
+      }
+      .card-content {
+        background: #fdfdfd;
+      }
+      .content {
+        white-space: pre-line;
+      }
+      .header-title {
+        color: #fdfdfd;
+        font-family: 'Permanent Marker', cursive;
+      }
+      .header-image-container {
+        overflow: hidden;
+        position: absolute;
+        top: 2rem;
+        right: 1rem;
+        padding: 1.5rem;
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        text-align: center;
+        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .2);
+      }
+      .header-image {
+        width: 1em;
+        height: 1em;
+      }
+      .card-content > p {
+        padding: 1rem;
+        min-height: 15rem;
+      }
+      #content {
+        height: 100%;
+        min-height: 13rem;
+        width: 100%;
+        border: none;
+      }
+      .lnr {
+        position: relative;
+        left: .03em;
+        display: inline-block;
+        fill: currentColor;
+        font-size: 5rem;
+      }
+      .thanks .lnr {
+        left: 0;
+        top: -.05em;
+      }
+      .thanks .card-header {
+        background: #D7263D;
+      }
+      .thanks .header-image-container {
+        background: #1B998B;
+      }
+      .thanks .header-image {
+        color: #F6E27F;
+      }
+      .manythanks .card-header {
+        background: #8CBCB9;
+      }
+      .manythanks .header-image-container {
+        background: #DDA448;
+      }
+      .manythanks .header-image {
+        color: #BB342F;
+      }
+      .welldone .card-header {
+        background: #F25757;
+      }
+      .welldone .header-image-container {
+        background: #EAF2E3;
+      }
+      .welldone .header-image {
+        color: #61E8E1;
+      }
+      .greatjob .card-header {
+        background: #5ADBFF;
+      }
+      .greatjob .header-image-container {
+        background: #FFDD4A;
+      }
+      .greatjob .header-image {
+        color: #FE9000;
+      }
+      .congrats .card-header {
+        background: #2CEAA3;
+      }
+      .congrats .header-image-container {
+        background: #FFFFEA;
+      }
+      .congrats .header-image {
+        color: #FF5E5B;
+      }
+      .awesome .card-header {
+        background: #AB87FF;
+      }
+      .awesome .header-image-container {
+        background: #C1FF9B;
+      }
+      .awesome .header-image {
+        color: #FFACE4;
+      }
+      .happy .card-header {
+        background: #1B9AAA;
+      }
+      .happy .header-image-container {
+        background: #EF476F;
+      }
+      .happy .header-image {
+        color: #FFED66;
+      }
+      .dummy {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
+  </head>
+  <body>
+    <aside class="info-box generator theme-picker-container">
+      <p>
+        <label for="type">Pick a theme:</label>
+        <select id="type">
+          <option value="">-- choose theme --</option>
+        </select>
+      </p>
+    </aside>
+    <main class="card">
+      <header class="card-header">
+        <h1 class="header-title">Thank you!</h1>
+        <div class="header-image-container">
+          <svg class="header-image lnr">
+            <!-- this is to trigger the svgembedder above -->
+            <use class="dummy" xlink:href="#lnr-star"></use>
+          </svg>
+        </div>
+      </header>
+      <article class="card-content">
+        <p class="content non-generator"></p>
+        <p class="generator">
+          <textarea id="content" placeholder="Write something nice..."></textarea>
+        </p>
+      </article>
+    </main>
+    <aside class="info-box generator url-container">
+      <p>
+        <label for="url">Copy and share url:</label>
+        <a id="url"></a>
+      </p>
+    </aside>
+    <aside class="info-box non-generator url-container">
+      <p>
+        <a href="index.html">Create your own Kudo Card</a>
+      </p>
+    </aside>
+    <footer>
+      <ul class="footer-links">
+        <li class="footer-link">Icons from <a href="https://linearicons.com/">https://linearicons.com/</a></li>
+        <li class="footer-link right"><a href="https://github.com/joakimbeng/kudo">Fork me on GitHub</a></li>
+      </ul>
+    </footer>
+    <script>
+      var typeMap = {
+        awesome: {image: 'rocket', header: 'Totally Awesome!'},
+        thanks: {image: 'star', header: 'Thank You!'},
+        manythanks: {image: 'heart', header: 'Many Thanks!'},
+        happy: {image: 'smile', header: 'Very Happy!'},
+        greatjob: {image: 'thumbs-up', header: 'Great Job!'},
+        welldone: {image: 'diamond', header: 'Well Done!'},
+        congrats: {image: 'graduation-hat', header: 'Congratulations!'}
+      };
+      var types = Object.keys(typeMap);
+      var model = {
+        type: null,
+        msg: null
+      };
+      function qs(search) {
+        if (!search) {
+          return {};
+        }
+        search = search.slice(1);
+        return search.split('&').reduce(function (q, arg) {
+          var keyVal = arg.split('=');
+          var key = keyVal[0];
+          var value = keyVal[1] ? decodeURIComponent(keyVal[1]) : null;
+          q[key] = typeof q[key] !== 'undefined' ? [q[key]].concat(value) : value;
+          return q;
+        }, {});
+      }
+      function updateImage(typeName) {
+        var type = typeMap[typeName];
+        var image = document.querySelector('.lnr');
+        var uses = document.querySelectorAll('use');
+        for (var i = 0; i < uses.length; i++) {
+          uses[i].remove();
+        }
+        var use = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+        use.setAttributeNS("http://www.w3.org/1999/xlink", 'href', '#lnr-' + type.image);
+        image.appendChild(use);
+      }
+      function updateTitle(typeName) {
+        var type = typeMap[typeName];
+        var title = document.querySelector('.header-title');
+        title.innerText = type.header;
+      }
+      function updateTheme(typeName) {
+        var body = document.body;
+        if (model.type) {
+          body.classList.remove(model.type);
+        }
+        body.classList.add(typeName);
+        model.type = typeName;
+        updateUrl();
+      }
+      function updateMessage(message) {
+        model.msg = message;
+        updateUrl();
+      }
+      function updateUrl() {
+        var link = document.getElementById('url');
+        var url = '' +
+          location.origin +
+          location.pathname +
+          '?type=' + (model.type || '') +
+          '&msg=' + encodeURIComponent(model.msg || '');
+        link.href = url;
+        link.innerText = url;
+      }
+      function fillDropdown() {
+        var select = document.getElementById('type');
+        Object.keys(typeMap).forEach(function (typeName) {
+          var opt = document.createElement('option');
+          opt.value = typeName;
+          opt.innerText = typeMap[typeName].header;
+          select.appendChild(opt);
+        });
+      }
+      function changeType(typeName) {
+        updateImage(typeName);
+        updateTitle(typeName);
+        updateTheme(typeName);
+      }
+      function attachEvents() {
+        document.getElementById('type').addEventListener('change', function (e) {
+          var typeName = e.target.value;
+          if (!typeName) {
+            return;
+          }
+          changeType(typeName);
+        });
+        document.getElementById('content').addEventListener('keydown', function (e) {
+          updateMessage(e.target.value);
+        });
+        document.getElementById('content').addEventListener('blur', function (e) {
+          updateMessage(e.target.value);
+        });
+      }
+      document.addEventListener("DOMContentLoaded", function(event) {
+        var data = qs(location.search);
+        if (types.indexOf(data.type) === -1) {
+          fillDropdown();
+          attachEvents();
+          document.body.classList.add('form');
+          return;
+        }
+        changeType(data.type);
+        data.msg = data.msg || 'NO MESSAGE GIVEN!';
+        var content = document.querySelector('.content');
+        content.innerText = data.msg;
+      });
+    </script>
+  </body>
+</html>
