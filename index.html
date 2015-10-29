@@ -352,7 +352,7 @@
         Object.keys(typeMap).forEach(function (typeName) {
           var opt = document.createElement('option');
           opt.value = typeName;
-          opt.innerText = typeMap[typeName].header;
+          opt.innerHTML = typeMap[typeName].header;
           select.appendChild(opt);
         });
       }
